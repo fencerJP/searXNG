@@ -1,34 +1,100 @@
-# to sync with .dockerignore & pyrightconfig.json
+# ==============================================================================
+# SearXNG & Gateway .gitignore
+# ==============================================================================
 
-*.pyc
-*/*.pyc
-*~
-*.swp
-geckodriver.log
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
 
-.coverage
-coverage/
-
-.govm/
-.nvm/
-cache/
+# C extensions & build artifacts
 build/
 dist/
-local/
-gh-pages/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
 *.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+local/
+cache/
+gh-pages/
 
-/package-lock.json
-/node_modules/
+# PyInstaller & py2app
+*.manifest
+*.spec
 
-.idea/
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
 
-searx/version_frozen.py
-.dir-locals.el
+# Unit test / coverage / analysis caches
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+.mypy_cache/
+.pytype/
+.ruff_cache/
 
-.python-version
-__pycache__/
+# SQLite Databases & runtime storage
 *.db
 *.db-shm
 *.db-wal
 *.db-journal
+tools/*.db*
+tools/notes/
+tests/sandbox/*.db*
+
+# Node / Web UI build artifacts
+/node_modules/
+/package-lock.json
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environments & Version files
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.python-version
+.govm/
+.nvm/
+
+# Generated files
+searx/version_frozen.py
+geckodriver.log
+*.log
+
+# Editors & IDEs
+.idea/
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+*.swp
+*.swo
+*~
+.dir-locals.el
+.DS_Store
