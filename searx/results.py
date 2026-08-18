@@ -249,7 +249,7 @@ class ResultContainer:
     def add_unresponsive_engine(self, engine_name: str, error_type: str, suspended: bool = False):
         with self._lock:
             if self._closed:
-                log.error("call to ResultContainer.add_unresponsive_engine after ResultContainer.close")
+                log.debug("call to ResultContainer.add_unresponsive_engine after ResultContainer.close")
                 return
             if searx.engines.engines[engine_name].display_error_messages:
                 self.unresponsive_engines.add(UnresponsiveEngine(engine_name, error_type, suspended))
@@ -257,7 +257,7 @@ class ResultContainer:
     def add_timing(self, engine_name: str, engine_time: float, page_load_time: float):
         with self._lock:
             if self._closed:
-                log.error("call to ResultContainer.add_timing after ResultContainer.close")
+                log.debug("call to ResultContainer.add_timing after ResultContainer.close")
                 return
             self.timings.append(Timing(engine_name, total=engine_time, load=page_load_time))
 

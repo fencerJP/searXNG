@@ -58,3 +58,13 @@ class ResultContainerTestCase(SearxTestCase):
         self.assertIn(result, result_list)
         self.assertEqual(result_list[0].title, result.title)
         self.assertEqual(result_list[0].content, result.content)
+
+    def test_post_close_unresponsive_and_timing(self):
+        container = ResultContainer()
+        container.close()
+        # Verify calling after close returns cleanly without error
+        container.add_unresponsive_engine("duckduckgo", "timeout")
+        container.add_timing("duckduckgo", 1.5, 0.5)
+        self.assertEqual(len(container.unresponsive_engines), 0)
+        self.assertEqual(len(container.timings), 0)
+

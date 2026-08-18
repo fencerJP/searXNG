@@ -1,0 +1,46 @@
+# Docker Compose for Isolated Sandbox Testing
+name: searxng-sandbox
+
+services:
+  searxng-test-mock-upstream:
+    container_name: searxng-test-mock-upstream
+    image: docker.io/searxng/searxng:latest
+    restart: "no"
+    ports:
+      - "8890:8890"
+    volumes:
+      - ./mock_upstream_server.py:/mock_upstream_server.py:ro
+    entrypoint: ["python3"]
+    command: ["/mock_upstream_server.py", "--host", "0.0.0.0", "--port", "8890", "-v"]
+    networks:
+      - searxng_test_net
+
+  searxng-test-core:
+    container_name: searxng-test-core
+    image: docker.io/searxng/searxng:latest
+    restart: "no"
+    ports:
+      - "8888:8080"
+    volumes:
+      - ./settings.yml:/etc/searxng/settings.yml:ro
+      - ../../searx/results.py:/usr/local/searxng/searx/results.py:ro
+    environment:
+      - SEARXNG_SECRET=sandboxtestkey
+      - SEARXNG_VALKEY_URL=valkey://searxng-test-valkey:6379/0
+    networks:
+      - searxng_test_net
+    depends_on:
+      - searxng-test-valkey
+      - searxng-test-mock-upstream
+
+  searxng-test-valkey:
+    container_name: searxng-test-valkey
+    image: docker.io/valkey/valkey:9-alpine
+    restart: "no"
+    command: valkey-server --loglevel warning
+    networks:
+      - searxng_test_net
+
+networks:
+  searxng_test_net:
+    driver: bridge

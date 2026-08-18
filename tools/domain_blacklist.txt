@@ -1,0 +1,37 @@
+# SearXNG Gateway Domain Blacklist
+# Lines starting with '#' and blank lines are ignored.
+# Subdomains are automatically matched (e.g. 'geeksforgeeks.org' matches 'www.geeksforgeeks.org', 'sub.geeksforgeeks.org').
+
+# Known SEO Content Farms & Auto-generated Code Scrapers
+geeksforgeeks.org
+javatpoint.com
+w3schools.com
+tutorialspoint.com
+guru99.com
+c-sharpcorner.com
+codechef.com
+programiz.com
+studytonight.com
+scaler.com
+simplilearn.com
+
+# Scraper Mirrors & Low-Quality Q&A Aggregators
+quora.com
+pinterest.com
+archive.org
+softpedia.com
+filehorse.com
+findanswers.org
+answer-drive.com
+techcult.com
+appuals.com
+windowsreport.com
+
+# Known Spam / MFA / Affiliate Rings
+couponbirds.com
+dontpayfull.com
+retailmenot.com
+dealspotr.com
+couponfollow.com
+wikibuy.com
+slickdeals.net

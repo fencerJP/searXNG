@@ -1,0 +1,100 @@
+# SearXNG Settings for Isolated Docker Sandbox Testing
+use_default_settings: true
+
+general:
+  debug: true
+  instance_name: "SearXNG-Sandbox"
+
+search:
+  safe_search: 0
+  autocomplete: ''
+  suspended_times:
+    SearxEngineCaptcha: 0
+    SearxEngineTooManyRequests: 0
+    SearxEngineAccessDenied: 0
+    cf_SearxEngineCaptcha: 0
+    cf_SearxEngineAccessDenied: 0
+    recaptcha_SearxEngineCaptcha: 0
+  formats:
+    - html
+    - json
+
+server:
+  secret_key: "sandboxtestkey"
+  limiter: false
+  image_proxy: false
+
+outgoing:
+  enable_http: true
+  request_timeout: 4.0
+  max_request_timeout: 8.0
+
+valkey:
+  url: valkey://searxng-test-valkey:6379/0
+
+plugins:
+  searx.plugins.tracker_url_remover.SXNGPlugin:
+    active: false
+
+# Custom JSON Mock Engines pointing to Mock Upstream inside test network
+engines:
+  - name: wikidata
+    inactive: true
+
+  - name: ahmia
+    inactive: true
+
+  - name: torch
+    inactive: true
+
+  - name: mock google
+    shortcut: mg
+    engine: json_engine
+    enable_http: true
+    search_url: http://searxng-test-mock-upstream:8890/search/mockgoogle?q={query}
+    results_query: results
+    title_query: title
+    url_query: url
+    content_query: content
+    categories: general
+    timeout: 3.0
+    disabled: false
+
+  - name: mock bing
+    shortcut: mb
+    engine: json_engine
+    enable_http: true
+    search_url: http://searxng-test-mock-upstream:8890/search/mockbing?q={query}
+    results_query: results
+    title_query: title
+    url_query: url
+    content_query: content
+    categories: general
+    timeout: 3.0
+    disabled: false
+
+  - name: mock duckduckgo
+    shortcut: md
+    engine: json_engine
+    enable_http: true
+    search_url: http://searxng-test-mock-upstream:8890/search/mockduckduckgo?q={query}
+    results_query: results
+    title_query: title
+    url_query: url
+    content_query: content
+    categories: general
+    timeout: 3.0
+    disabled: false
+
+  - name: mock brave
+    shortcut: mbr
+    engine: json_engine
+    enable_http: true
+    search_url: http://searxng-test-mock-upstream:8890/search/mockbrave?q={query}
+    results_query: results
+    title_query: title
+    url_query: url
+    content_query: content
+    categories: news
+    timeout: 3.0
+    disabled: false
